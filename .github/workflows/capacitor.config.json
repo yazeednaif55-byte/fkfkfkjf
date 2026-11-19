@@ -1,1 +1,5 @@
-
+{
+  "appId": "com.liquidos.simulator",
+  "appName": "LiquidOS",
+  "webDir": "www"
+}
