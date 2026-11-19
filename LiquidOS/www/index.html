@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>LiquidOS Simulator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- خلفية متحركة لإبراز تأثير Liquid Glass -->
+  <div class="wallpaper">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- الشريط العلوي للنظام -->
+  <header class="top-bar liquid-glass">
+    <div class="os-badge">
+      <span class="status-dot"></span>
+      <span id="current-os-name">LiquidOS 1.0</span>
+    </div>
+    <div class="os-switcher">
+      <button type="button" class="os-btn active" data-os="LiquidOS">LiquidOS</button>
+      <button type="button" class="os-btn" data-os="Windows Sim">Windows</button>
+      <button type="button" class="os-btn" data-os="macOS Sim">macOS</button>
+      <button type="button" class="os-btn" data-os="Linux Sim">Linux</button>
+    </div>
+    <div id="clock" class="clock">00:00</div>
+  </header>
+
+  <!-- مساحة سطح المكتب والنوافذ -->
+  <main id="desktop" class="desktop">
+    <div id="window-1" class="app-window liquid-glass">
+      <div class="window-header" id="window-drag-handle">
+        <div class="window-controls">
+          <span class="dot red"></span>
+          <span class="dot yellow"></span>
+          <span class="dot green"></span>
+        </div>
+        <span class="window-title">محاكي الأنظمة — Liquid Glass</span>
+      </div>
+      <div class="window-body">
+        <p>أهلاً بك في نواة المحاكي. بدّل النظام من الشريط العلوي أو اسحب النافذة لاختبار السلاسة واللمس.</p>
+        <button type="button" id="action-btn" class="glass-btn">اختبار استجابة النظام</button>
+        <p id="status-msg" class="status-msg"></p>
+      </div>
+    </div>
+  </main>
+
+  <!-- شريط التطبيقات السفلي (Dock) -->
+  <nav class="dock-wrapper">
+    <div class="dock liquid-glass">
+      <button type="button" class="dock-item" data-app="الأنظمة" title="الأنظمة"></button>
+      <button type="button" class="dock-item" data-app="الملفات" title="الملفات"></button>
+      <button type="button" class="dock-item" data-app="الطرفية" title="الطرفية"></button>
+      <button type="button" class="dock-item" data-app="الإعدادات" title="الإعدادات"></button>
+    </div>
+  </nav>
+
+  <script src="script.js"></script>
+</body>
+</html>
