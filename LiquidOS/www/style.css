@@ -1,3 +1,69 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Tahoma, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: #ffffff;
+  background: #0b0f19;
+  user-select: none;
+}
+
+/* خلفية متحركة لإبراز تأثير Liquid Glass */
+.wallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: radial-gradient(circle at top right, #1b2845, #090d16 70%);
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  opacity: 0.7;
+  animation: floatBlob 12s infinite alternate ease-in-out;
+}
+
+.blob-1 {
+  width: 340px;
+  height: 340px;
+  background: #3b82f6;
+  top: 8%;
+  right: 12%;
+}
+
+.blob-2 {
+  width: 300px;
+  height: 300px;
+  background: #a855f7;
+  bottom: 15%;
+  left: 14%;
+  animation-delay: -4s;
+}
+
+.blob-3 {
+  width: 240px;
+  height: 240px;
+  background: #06b6d4;
+  top: 45%;
+  left: 42%;
+  animation-delay: -8s;
+}
+
+@keyframes floatBlob {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(35px, -25px) scale(1.12); }
+}
+
+/* خامة الليكويد جلاس */
 .liquid-glass {
   background: rgba(255, 255, 255, 0.14);
   backdrop-filter: blur(22px) saturate(180%);
@@ -5,4 +71,181 @@
   border: 1px solid rgba(255, 255, 255, 0.35);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.4);
   border-radius: 24px;
+}
+
+/* الشريط العلوي */
+.top-bar {
+  position: relative;
+  z-index: 10;
+  margin: 12px 16px 0;
+  padding: 10px 18px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.os-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 10px #22c55e;
+}
+
+.os-switcher {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.os-btn {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  padding: 5px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: 0.2s ease;
+}
+
+.os-btn:hover,
+.os-btn.active {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+.clock {
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+}
+
+/* سطح المكتب والنافذة */
+.desktop {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  height: calc(100% - 140px);
+}
+
+.app-window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(460px, calc(100% - 32px));
+  overflow: hidden;
+}
+
+.window-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: grab;
+  touch-action: none;
+}
+
+.window-header:active {
+  cursor: grabbing;
+}
+
+.window-controls {
+  display: flex;
+  gap: 7px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.red { background: #ff5f56; }
+.dot.yellow { background: #ffbd2e; }
+.dot.green { background: #27c93f; }
+
+.window-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.window-body {
+  padding: 20px;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+.glass-btn {
+  margin-top: 14px;
+  padding: 10px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.glass-btn:hover {
+  background: rgba(255, 255, 255, 0.32);
+}
+
+.status-msg {
+  margin-top: 12px;
+  min-height: 24px;
+  color: #bae6fd;
+  font-size: 0.9rem;
+}
+
+/* شريط الـ Dock السفلي */
+.dock-wrapper {
+  position: fixed;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  padding: 0 12px;
+}
+
+.dock {
+  display: flex;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 26px;
+}
+
+.dock-item {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  font-size: 1.35rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.dock-item:hover,
+.dock-item.active {
+  transform: translateY(-6px) scale(1.06);
+  background: rgba(255, 255, 255, 0.28);
 }
