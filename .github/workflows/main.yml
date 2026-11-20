@@ -1,13 +1,14 @@
-name: Build LiquidOS IPA
+name: Build Unsigned IPA
 
 on:
-  workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: macos-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -17,38 +18,29 @@ jobs:
         with:
           node-version: "24"
 
-      - name: Prepare webDir from LiquidOS/www
+      - name: Prepare project files
         run: |
-          rm -rf www
+          cp .github/workflows/package.json ./package.json
+          cp .github/workflows/capacitor.config.json ./capacitor.config.json
           mkdir -p www
-          cp -r LiquidOS/www/* www/
+          cp -r LiquidOS/www/* ./www/
 
-      - name: Install dependencies and add iOS platform
+      - name: Install dependencies and add iOS
         run: |
           npm install
           npx cap add ios
           npx cap sync ios
 
-      - name: Build unsigned iOS App
+      - name: Build Unsigned IPA
         run: |
           cd ios/App
-          xcodebuild -workspace App.xcworkspace \
-            -scheme App \
-            -configuration Release \
-            -sdk iphoneos \
-            -derivedDataPath ../../build \
-            CODE_SIGN_IDENTITY="" \
-            CODE_SIGNING_REQUIRED=NO \
-            CODE_SIGNING_ALLOWED=NO
-
-      - name: Package into IPA
-        run: |
+          xcodebuild -project App.xcodeproj -scheme App -configuration Release -sdk iphoneos -archivePath $PWD/build/App.xcarchive archive CODE_SIGNING_ALLOWED=NO
           mkdir -p Payload
-          cp -r build/Build/Products/Release-iphoneos/App.app Payload/
+          cp -r $PWD/build/App.xcarchive/Products/Applications/App.app Payload/
           zip -r LiquidOS.ipa Payload
 
       - name: Upload IPA Artifact
         uses: actions/upload-artifact@v4
         with:
           name: LiquidOS-Unsigned-IPA
-          path: LiquidOS.ipa
+          path: ios/App/LiquidOS.ipa
